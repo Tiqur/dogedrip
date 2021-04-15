@@ -1,8 +1,14 @@
 import './index.scss';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import HomePage from './pages/Home/Home.jsx';
 
 function App() {
   return (
-    <p>To the moon!</p>
+    <BrowserRouter>
+      <Switch>
+        <Route exact path='/' component={HomePage} />
+      </Switch>
+    </BrowserRouter>
   );
 }
 

@@ -1,5 +1,15 @@
 .header {
   background: #E7D29D;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
   width: 100%;
   height: 15em;
+}
+
+.title {
+  font-family: 'Roboto';
+  font-size: 5em;
+  color: #1E4151;
 }

@@ -9,8 +9,8 @@ const HomePage = (props) => {
       <Header />
       <Container className={styles.address_container}>
         <TextField className={styles.address_input} label='Enter your public wallet address here' variant='outlined' />
-        <Button varient='contained' color='primary'>Get free Doge!</Button>
-        <Button varient='outlined' color='secondary'>Donate to supply</Button>
+        <Button variant='contained' color='primary'>Get free Doge!</Button>
+        <Button variant='outlined' color='secondary'>Donate to supply</Button>
       </Container>
     </Box>
   )

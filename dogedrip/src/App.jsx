@@ -1,14 +1,18 @@
 import './index.scss';
+import { ThemeProvider } from '@material-ui/core/styles';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import HomePage from './pages/Home/Home.jsx';
+import theme from './components/Theme';
 
 function App() {
   return (
-    <BrowserRouter>
-      <Switch>
-        <Route exact path='/' component={HomePage} />
-      </Switch>
-    </BrowserRouter>
+    <ThemeProvider theme={theme}>
+      <BrowserRouter>
+        <Switch>
+          <Route exact path='/' component={HomePage} />
+        </Switch>
+      </BrowserRouter>
+    </ThemeProvider>
   );
 }
 

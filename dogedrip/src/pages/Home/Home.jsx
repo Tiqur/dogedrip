@@ -1,13 +1,16 @@
 import styles from './Home.module.scss';
 import Header from '../../components/Header/Header.jsx';
-import { TextField, Box, Container, Button } from '@material-ui/core';
+import { TextField, Box, Typography, Button } from '@material-ui/core';
 
 
 const HomePage = (props) => {
+  const supply = 430.23;
+
   return (
-    <Box flex flexDirection='column'>
+    <Box display='flex' alignItems='center' flexDirection='column'>
       <Header />
-      <Container className={styles.address_container}>
+      <Box display='flex' flexDirection='column' alignItems='center' className={styles.container}>
+        <Typography paragraph variant='body1'>Current supply: {supply}</Typography>
         <TextField className={styles.address_input} label='Enter your public wallet address here' variant='outlined' />
         <Box display='flex' justifyContent='center' marginTop='3em'>
           <Box display='flex' justifyContent='space-between' width='25em'>
@@ -15,7 +18,7 @@ const HomePage = (props) => {
             <Button variant='outlined' color='secondary'>Donate to supply</Button>
           </Box>
         </Box>
-      </Container>
+      </Box>
     </Box>
   )
 }

@@ -1,7 +1,7 @@
-import './index.scss';
+import './index.css';
 import { ThemeProvider } from '@material-ui/core/styles';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import HomePage from './pages/Home/Home.jsx';
+import HomePage from './pages/Home.jsx';
 import theme from './components/Theme';
 
 function App() {

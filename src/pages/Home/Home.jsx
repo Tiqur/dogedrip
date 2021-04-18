@@ -14,7 +14,7 @@ const HomePage = (props) => {
 
   const addressIsValid = async (address) => {
     if (!address) return false;
-    return await (axios.get(`https://dogechain.info/chain/Dogecoin/q/checkaddress/${address}`).catch(e => {
+    return (await axios.get(`https://dogechain.info/chain/Dogecoin/q/checkaddress/${address}`).catch(e => {
       return false;
     })).status === 200;
   }

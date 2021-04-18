@@ -1,12 +1,16 @@
 import Header from '../components/Header.jsx';
-import { Backdrop, Snackbar, TextField, Box, Typography, Button } from '@material-ui/core';
+import { Modal, Snackbar, TextField, Box, Typography, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import MuiAlert from '@material-ui/lab/Alert';
 import { useRef, useState } from 'react';
+import publicQR from '../assets/public_address_QR.png';
 import axios from 'axios';
 
 const useStyles = makeStyles((theme) => ({
   backdrop: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
     zIndex: theme.zIndex.drawer + 1
   },
   container: {
@@ -22,10 +26,9 @@ const HomePage = (props) => {
   const walletAddressRef = useRef(null);
   const [snackBarState, setSnackBarState] = useState(false);
   const [addressIsValid, setAddressIsValid] = useState(false);
-  const [backdropIsOpen, setBackdropOpen] = useState(false);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
   const styles = useStyles();
   const supply = 430.23;
-
 
   const verifyAddress = async (address) => {
     if (!address) return false;
@@ -38,9 +41,14 @@ const HomePage = (props) => {
     <Box display='flex' alignItems='center' flexDirection='column'>
 
       { /* Donation popup */ }
-      <Backdrop className={styles.backdrop} open={backdropIsOpen} onClick={() => setBackdropOpen(false)}>
-
-      </Backdrop>
+      <Modal className={styles.backdrop} open={modalIsOpen} onClose={() => setModalIsOpen(false)} disableRestoreFocus>
+          <Box display='flex' bgcolor='#F2EDE0' textAlign='center' justifyContent='center' flexDirection='column' p='5em'>
+            <Button>
+              <img src={publicQR}/>
+            </Button>
+            <Typography variant='body1'>Address goes here</Typography>
+          </Box>
+      </Modal>
 
       <Header />
       <Box display='flex' flexDirection='column' alignItems='center' className={styles.container}>
@@ -54,15 +62,13 @@ const HomePage = (props) => {
         { /* Buttons */ }
         <Box display='flex' justifyContent='center' marginTop='3em'>
           <Box display='flex' justifyContent='space-between' width='25em'>
-
             <Button onClick={async () => {
               const isValid = await verifyAddress(walletAddressRef.current.value);
               setAddressIsValid(isValid);
               setSnackBarState(true);
             }} variant='contained' color='primary'>Get free Doge!</Button>
-
             <Button onClick={() => {
-              setBackdropOpen(true);
+              setModalIsOpen(true);
             }}variant='outlined' color='secondary'>Donate to supply</Button>
           </Box>
         </Box>

@@ -22,6 +22,7 @@ const HomePage = (props) => {
   const walletAddressRef = useRef(null);
   const [snackBarState, setSnackBarState] = useState(false);
   const [addressIsValid, setAddressIsValid] = useState(false);
+  const [backdropIsOpen, setBackdropOpen] = useState(false);
   const styles = useStyles();
   const supply = 430.23;
 
@@ -37,7 +38,7 @@ const HomePage = (props) => {
     <Box display='flex' alignItems='center' flexDirection='column'>
 
       { /* Donation popup */ }
-      <Backdrop className={styles.backdrop} open={true}>
+      <Backdrop className={styles.backdrop} open={backdropIsOpen} onClick={() => setBackdropOpen(false)}>
 
       </Backdrop>
 
@@ -53,12 +54,16 @@ const HomePage = (props) => {
         { /* Buttons */ }
         <Box display='flex' justifyContent='center' marginTop='3em'>
           <Box display='flex' justifyContent='space-between' width='25em'>
+
             <Button onClick={async () => {
               const isValid = await verifyAddress(walletAddressRef.current.value);
               setAddressIsValid(isValid);
               setSnackBarState(true);
             }} variant='contained' color='primary'>Get free Doge!</Button>
-            <Button variant='outlined' color='secondary'>Donate to supply</Button>
+
+            <Button onClick={() => {
+              setBackdropOpen(true);
+            }}variant='outlined' color='secondary'>Donate to supply</Button>
           </Box>
         </Box>
         

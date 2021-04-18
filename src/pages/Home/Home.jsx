@@ -9,10 +9,11 @@ import axios from 'axios';
 const HomePage = (props) => {
   const walletAddressRef = useRef(null);
   const [snackBarState, setSnackBarState] = useState(false);
+  const [addressIsValid, setAddressIsValid] = useState(false);
   const supply = 430.23;
 
 
-  const addressIsValid = async (address) => {
+  const verifyAddress = async (address) => {
     if (!address) return false;
     return (await axios.get(`https://dogechain.info/chain/Dogecoin/q/checkaddress/${address}`).catch(e => {
       return false;
@@ -34,8 +35,9 @@ const HomePage = (props) => {
         <Box display='flex' justifyContent='center' marginTop='3em'>
           <Box display='flex' justifyContent='space-between' width='25em'>
             <Button onClick={async () => {
-              const isValid = await addressIsValid(walletAddressRef.current.value);
-              setSnackBarState(!isValid);
+              const isValid = await verifyAddress(walletAddressRef.current.value);
+              setAddressIsValid(isValid);
+              setSnackBarState(true);
             }} variant='contained' color='primary'>Get free Doge!</Button>
             <Button variant='outlined' color='secondary'>Donate to supply</Button>
           </Box>
@@ -43,7 +45,11 @@ const HomePage = (props) => {
         
         { /* Alert user if address is invalid */ }
         <Snackbar open={snackBarState} onClose={() => setSnackBarState(false)} autoHideDuration={6000}>
-          <MuiAlert elevation={6} variant='filled' severity='error'>Invalid wallet address!</MuiAlert>
+          <MuiAlert elevation={6} variant='filled' severity={addressIsValid ? 'success' : 'error'}>{
+            addressIsValid ?
+            'Wallet address verified!' :
+            'Invalid wallet address!'
+          }</MuiAlert>
         </Snackbar>
 
       </Box>

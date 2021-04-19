@@ -44,7 +44,7 @@ const HomePage = (props) => {
       <Modal className={styles.backdrop} open={modalIsOpen} onClose={() => setModalIsOpen(false)} disableRestoreFocus>
           <Box display='flex' bgcolor='#F2EDE0' textAlign='center' justifyContent='center' flexDirection='column' p='5em'>
             <Button>
-              <img src={publicQR}/>
+              <img draggable={false} src={publicQR}/>
             </Button>
             <Typography variant='body1'>Address goes here</Typography>
           </Box>
